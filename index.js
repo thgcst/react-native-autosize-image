@@ -1,11 +1,19 @@
 import React, { useState, useEffect, memo } from "react";
-import { oneOfType, number, object, func } from "prop-types";
+import { oneOfType, number, object, func, bool } from "prop-types";
 import { Image, Animated } from "react-native";
 import FastImage from "react-native-fast-image";
 
 const AnimatedFastImage = Animated.createAnimatedComponent(FastImage);
 
-function AutoSizeImage({ source, width, height, style, onSize, onLoadEnd }) {
+function AutoSizeImage({
+  source,
+  width,
+  height,
+  style,
+  onSize,
+  onLoadEnd,
+  animated
+}) {
   const [resultWidth, setResultWidth] = useState(null);
   const [resultHeight, setResultHeight] = useState(null);
 
@@ -13,6 +21,7 @@ function AutoSizeImage({ source, width, height, style, onSize, onLoadEnd }) {
     if (typeof source === "object") {
       Image.getSize(source, (widthGot, heightGot) => {
         setSize(widthGot, heightGot);
+        onSize({ width: widthGot, height: heightGot });
       });
     } else if (typeof source === "number") {
       const response = Image.resolveAssetSource(source);
@@ -20,6 +29,7 @@ function AutoSizeImage({ source, width, height, style, onSize, onLoadEnd }) {
       const heightGot = response.height;
 
       setSize(widthGot, heightGot);
+      onSize({ width: widthGot, height: heightGot });
     }
   }
 
@@ -46,13 +56,21 @@ function AutoSizeImage({ source, width, height, style, onSize, onLoadEnd }) {
 
   return (
     <>
-      {resultWidth !== null && resultHeight !== null && (
-        <AnimatedFastImage
-          source={source}
-          style={[style, { width: resultWidth, height: resultHeight }]}
-          onLoadEnd={onLoadEnd()}
-        />
-      )}
+      {resultWidth !== null &&
+        resultHeight !== null &&
+        (animated ? (
+          <AnimatedFastImage
+            source={source}
+            style={[style, { width: resultWidth, height: resultHeight }]}
+            onLoadEnd={onLoadEnd()}
+          />
+        ) : (
+          <FastImage
+            source={source}
+            style={[style, { width: resultWidth, height: resultHeight }]}
+            onLoadEnd={onLoadEnd()}
+          />
+        ))}
     </>
   );
 }
@@ -63,7 +81,8 @@ AutoSizeImage.propTypes = {
   height: number,
   style: oneOfType([number, object]),
   onSize: func,
-  onLoadEnd: func
+  onLoadEnd: func,
+  animated: bool
 };
 
 AutoSizeImage.defaultProps = {
@@ -71,7 +90,8 @@ AutoSizeImage.defaultProps = {
   height: null,
   style: {},
   onSize: size => {},
-  onLoadEnd: () => {}
+  onLoadEnd: () => {},
+  animated: false
 };
 
 export default memo(AutoSizeImage);

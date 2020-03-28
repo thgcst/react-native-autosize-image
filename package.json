@@ -1,5 +1,5 @@
 {
-  "name": "react-native-autosize-image",
+  "name": "react-native-image-autosize",
   "version": "1.0.0",
   "description": "Automatically sets your image dimension in order to preserve the aspect ratio",
   "main": "index.js",
@@ -24,9 +24,5 @@
   "dependencies": {
     "prop-types": "^15.7.2",
     "react-native-fast-image": "^8.1.5"
-  },
-  "peerDependencies": {
-    "react": "^16.9.0",
-    "react-native": "^0.61.5"
   }
 }
