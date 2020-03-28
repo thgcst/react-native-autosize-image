@@ -19,7 +19,7 @@ function AutoSizeImage({
 
   function getImageSize() {
     if (typeof source === "object") {
-      Image.getSize(source, (widthGot, heightGot) => {
+      Image.getSize(source.uri, (widthGot, heightGot) => {
         setSize(widthGot, heightGot);
         onSize({ width: widthGot, height: heightGot });
       });
@@ -29,7 +29,6 @@ function AutoSizeImage({
       const heightGot = response.height;
 
       setSize(widthGot, heightGot);
-      onSize({ width: widthGot, height: heightGot });
     }
   }
 
@@ -37,15 +36,24 @@ function AutoSizeImage({
     if (width === null && height === null) {
       setResultWidth(200);
       setResultHeight(200);
-      onSize({ width: 200, height: 200 });
+      onSize({
+        resized: { width: 200, height: 200 },
+        original: { width: widthFunc, height: heightFunc }
+      });
     } else if (width === null || (height !== null && height < width)) {
       setResultHeight(height);
       setResultWidth((height * widthFunc) / heightFunc);
-      onSize({ width: (height * widthFunc) / heightFunc, height });
+      onSize({
+        resized: { width: (height * widthFunc) / heightFunc, height },
+        original: { width: widthFunc, height: heightFunc }
+      });
     } else if (height === null || (width !== null && width <= height)) {
       setResultWidth(width);
       setResultHeight((width * heightFunc) / widthFunc);
-      onSize({ width, height: (width * heightFunc) / widthFunc });
+      onSize({
+        resized: { width, height: (width * heightFunc) / widthFunc },
+        original: { width: widthFunc, height: heightFunc }
+      });
     }
   }
 
