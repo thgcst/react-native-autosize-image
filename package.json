@@ -1,0 +1,30 @@
+{
+  "name": "react-native-autosize-image",
+  "version": "1.0.0",
+  "description": "Automatically sets your image dimension in order to preserve the aspect ratio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thgcst/react-native-autosize-image.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Thiago Costa",
+    "email": "thiagodias2708@gmail.com",
+    "url": "https://github.com/thgcst"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thgcst/react-native-autosize-image/issues"
+  },
+  "homepage": "https://github.com/thgcst/react-native-autosize-image#readme",
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-native": "^0.61.5",
+    "react-native-fast-image": "^8.1.5"
+  }
+}
