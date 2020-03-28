@@ -23,8 +23,10 @@
   "homepage": "https://github.com/thgcst/react-native-autosize-image#readme",
   "dependencies": {
     "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-native": "^0.61.5",
     "react-native-fast-image": "^8.1.5"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5"
   }
 }
