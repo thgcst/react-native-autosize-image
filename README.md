@@ -1,4 +1,4 @@
-# react-native-autosize-image
+# react-native-image-autosize
 
 Tired of struggling to keep the aspect ratio on a image using React Native? This component will help you, just set the width and it will auto adjust the height in order to keep the aspect ratio and vice versa.
 
